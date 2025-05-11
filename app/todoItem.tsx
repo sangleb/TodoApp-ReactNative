@@ -14,7 +14,7 @@ export function TodoItem({ todoValue, isCompleted, markComplete } : TodoItemProp
 
     function handlePress(){
         Alert.alert(
-            "Delete Todo", 
+            "Manage Todo", 
             `Are you sure you want to mark todo as ${isCompleted? "pending" : "complete"}?`,
             [
                 {

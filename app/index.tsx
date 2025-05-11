@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, TextInput } from "react-native";
 import { theme } from "./theme";
 import { TodoItem } from "./todoItem";
 
@@ -28,6 +28,7 @@ export default function HomeScreen() {
         console.log("todo added is - ", todo);
         setTodo("");
         setTodoList([
+            ...todoList,
             {
                 todoValue: todo,
                 isCompleted: false,
@@ -49,16 +50,23 @@ export default function HomeScreen() {
         setTodoList(newTodoList);
     }
     return (
-        <View
+        <ScrollView
             style= {styles.container}
+            contentContainerStyle={{
+                justifyContent: 'center',
+                marginTop: 30,
+                paddingBottom: 16,
+            }}
+            // stickyHeaderIndices={[0]}
         >
-            <TextInput 
+            <TextInput
                 placeholder="add a new todo..."
                 style={styles.textInput}
                 onChangeText={handleChangeText}
                 returnKeyType="done"
-                onSubmitEditing={handleSubmit}
                 value={todo}
+                onSubmitEditing={handleSubmit}
+                
             />
             {
                 todoList.map((currentTodo, index) => (
@@ -70,13 +78,12 @@ export default function HomeScreen() {
                     />
                 ))
             }
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
         backgroundColor: theme.whiteColor,
         flex: 1,
     },
